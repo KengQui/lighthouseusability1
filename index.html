@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Payroll Assistant - Multi-Step Workflow</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <header class="global-header">
+        <img src="attached_assets/Global header.svg" alt="Global Header" class="header-image" />
+    </header>
+    <div class="app-container">
+        <!-- Chat Panel -->
+        <!-- REPLACE this section in your index.html -->
+        <div class="chat-panel intro-mode" id="chatPanel">
+            <!-- NEW: Workflow Sidebar 
+            <div class="workflow-sidebar" id="workflowSidebar" style="display: none;">
+                <div class="workflow-sidebar-header">
+                    Setup Progress
+                </div>-->
+
+                <!-- Pay Schedule Section 
+                <div class="workflow-section" id="payScheduleSection">
+                    <div class="workflow-section-title">Pay Schedule</div>
+
+                    <div class="workflow-step active" id="step-1" onclick="navigateToWorkflowStep(1)">
+                        <div class="step-circle"></div>
+                        <div class="step-text">Review schedule</div>
+                    </div>
+
+                    <div class="workflow-step" id="step-2" onclick="navigateToWorkflowStep(2)">
+                        <div class="step-circle"></div>
+                        <div class="step-text">Review pay date</div>
+                    </div>
+                </div>-->
+
+                <!-- Earning Code Section (initially hidden)
+                <div class="workflow-section" id="earningCodeSection" style="display: none;">
+                    <div class="workflow-section-title">Earning Codes</div>
+
+                    <div class="workflow-step" id="step-3" onclick="navigateToWorkflowStep(3)">
+                        <div class="step-circle"></div>
+                        <div class="step-text">Review earning code list</div>
+                    </div>
+
+                    <div class="workflow-step" id="step-4" onclick="navigateToWorkflowStep(4)">
+                        <div class="step-circle"></div>
+                        <div class="step-text">Configuration</div>
+                    </div>
+
+                    <div class="workflow-step" id="step-5" onclick="navigateToWorkflowStep(5)">
+                        <div class="step-circle"></div>
+                        <div class="step-text">W2 preview</div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- MODIFIED: Chat Content Area -->
+                     <div class="chat-content">
+                <!-- Toggle Button (moved inside chat-content) -->
+                <div class="panel-toggle-edge">
+                    <button class="panel-toggle-btn" id="panelToggleBtn" onclick="togglePanelSize();">
+                        <i class="material-icons panel-toggle-icon">swap_horiz</i>
+                    </button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Your existing messages will be here -->
+                </div>
+
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Ask me anything..." onkeypress="handleKeyPress(event)">
+                    <button class="send-button" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Right Panel -->
+        <div class="table-panel" id="tablePanel">
+            <div class="panel-header">
+                <h2>Review Extracted Pay Schedules</h2>
+
+            </div>
+            <div class="panel-content" id="panelContent">
+                <div class="panel-content-container">
+                    <div class="step-progress">
+                        📋 Step 1 of 6: Review each pay schedule and approve them
+                    </div>
+
+                    <!-- Schedule Cards Container -->
+                    <div class="schedule-cards">
+                        <div class="schedule-card">
+                            <div class="card-header">
+                                <div class="card-title">Semi-Monthly</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Name</div>
+                                    <div class="detail-value">Semi-Monthly Payroll</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">First pay date</div>
+                                    <div class="detail-value">August 15, 2025</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Frequency</div>
+                                    <div class="detail-value">24 pay periods/year</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Payroll date</div>
+                                    <div class="detail-value">15th and last day</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Hours per pay period</div>
+                                    <div class="detail-value">80 hours</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Weekend pay date</div>
+                                    <div class="detail-value">Friday before the date</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Holiday pay date</div>
+                                    <div class="detail-value">Friday before the date</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-card">
+                            <div class="card-header">
+                                <div class="card-title">Weekly</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Name</div>
+                                    <div class="detail-value">Weekly Payroll</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">First pay date</div>
+                                    <div class="detail-value">August 8, 2025</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Frequency</div>
+                                    <div class="detail-value">52 pay periods/year</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Payroll date</div>
+                                    <div class="detail-value">Every Friday</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Hours per pay period</div>
+                                    <div class="detail-value">40 hours</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Weekend pay date</div>
+                                    <div class="detail-value">Friday before the date</div>
+                                </div>
+                                <div class="schedule-detail">
+                                    <div class="detail-label">Holiday pay date</div>
+                                    <div class="detail-value">Friday before the date</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
